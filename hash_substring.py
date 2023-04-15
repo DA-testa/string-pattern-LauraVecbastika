@@ -13,7 +13,7 @@ def read_input():
             text = input()
         if text.startswith("F"):
             #file_name = input()
-            file_name = open("./test/06"+file_name, 'r')
+            file_name = open("./test/06", 'r')
             dataLasa = file_name.read()
             splitedData=dataLasa.split()
             pattern = splitedData[0].rstrip()
