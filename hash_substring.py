@@ -18,7 +18,7 @@ def read_input():
             splitedData=dataLasa.split()
             pattern = splitedData[0].rstrip()
             text =splitedData[1].rstrip()
-            
+        file_name.close()
     # after input type choice
     # read two lines 
     # first line is pattern 
@@ -27,7 +27,6 @@ def read_input():
     # return both lines in one return
     
     # this is the sample return, notice the rstrip function
-        file_name.close()
         return (pattern, text)
 
 def print_occurrences(output):
