@@ -3,8 +3,22 @@
 def read_input():
     # this function needs to aquire input both from keyboard and file
     # as before, use capital i (input from keyboard) and capital f (input from file) to choose which input type will follow
-    
-    
+        text=input()
+        text=text.upper()
+
+        # input from keyboard
+        
+        if text.startswith("I"):
+            pattern = input()
+            text = input()
+        if text.startswith("F"):
+            file_name = input()
+            file_name = open("./test/"+file_name, 'r')
+            dataLasa = file_name.read()
+            splitedData=dataLasa.split()
+            pattern = splitedData[0]
+            text =splitedData[1]
+       
     # after input type choice
     # read two lines 
     # first line is pattern 
@@ -13,7 +27,7 @@ def read_input():
     # return both lines in one return
     
     # this is the sample return, notice the rstrip function
-    return (input().rstrip(), input().rstrip())
+        return (pattern.rstrip(), text().rstrip())
 
 def print_occurrences(output):
     # this function should control output, it doesn't need any return
@@ -21,12 +35,41 @@ def print_occurrences(output):
 
 def get_occurrences(pattern, text):
     # this function should find the occurances using Rabin Karp alghoritm 
-
+    d=256 #simbolu skaits ASCII tabulā
+    q=13 #pirmskaitlis
+    patLen=len(pattern)
+    textLen=len(text)
+    result=""
+    j=0
+    i=0
+    patHashVal=0 #hash vērtība priekš paterna
+    textHashVAl=0 #hash vērtība priekš teksta
+    h=1
     # and return an iterable variable
-    return [0]
+    for i in range(patLen-1):
+         h=(h*d)%q
+         #aprēķinās hash vērtību paternam un teksta pirmā loga vērtības
+    for i in range(patLen):
+         patHashVal=(d * patHashVal+ ord(pattern[i]))%q
+         textHashVAl=(d* textHashVAl+ ord(text[i]))%q
+    #iet cauri tekstam pārbaudot, kur paterns sakrīt ar tekstu
+    for i in range(textLen-patLen+1):
+        if patHashVal==textHashVAl:
+              for j in range(patLen):
+                   if text[i+j] !=pattern[j]:
+                        break
+              j+=1
+              if j==patLen:
+                 result=result+str(i) 
+        #aprēķina teksta nākamā loga vērtību + noņem pirmo simbolu un pievieno pēdējo 
+        if i< textLen-patLen:
+            textHashVAl=(d*(textHashVAl-ord(text)[i]*h)+ord(text[i+patHashVal]))%q
+        #ja gadījumā textHashVAl ir negatīva to pārveidoju uz pozitīvu
+            if textHashVAl<0:
+                 t=t+q
+    return (result)
 
 
 # this part launches the functions
 if __name__ == '__main__':
     print_occurrences(get_occurrences(*read_input()))
-
