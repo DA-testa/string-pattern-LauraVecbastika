@@ -18,7 +18,7 @@ def read_input():
             splitedData=dataLasa.split()
             pattern = splitedData[0].rstrip()
             text =splitedData[1].rstrip()
-        file_name.close()
+        
     # after input type choice
     # read two lines 
     # first line is pattern 
