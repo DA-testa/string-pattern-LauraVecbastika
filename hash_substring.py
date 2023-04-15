@@ -12,12 +12,12 @@ def read_input():
             pattern = input()
             text = input()
         if text.startswith("F"):
-            file_name = open('./tests/'+'06', 'r')
+            file_name = open('./test/'+'06', 'r')
             dataLasa = file_name.read()
             splitedData=dataLasa.split()
             pattern = splitedData[0].rstrip()
             text =splitedData[1].rstrip()
-        
+            
     # after input type choice
     # read two lines 
     # first line is pattern 
@@ -26,11 +26,12 @@ def read_input():
     # return both lines in one return
     
     # this is the sample return, notice the rstrip function
+        
         return (pattern, text)
 
-def print_occurrences(output):
-    # this function should control output, it doesn't need any return
-    print(' '.join(map(str, output)))
+# def print_occurrences(output):
+#     # this function should control output, it doesn't need any return
+#     print(' '.join(map(str, output)))
 
 def get_occurrences(pattern, text):
     # this function should find the occurances using Rabin Karp alghoritm 
@@ -39,7 +40,6 @@ def get_occurrences(pattern, text):
     patLen=len(pattern)
     textLen=len(text)
     result=''
-    g=0
     i=0
     patHashVal=0 #hash vērtība priekš paterna
     textHashVal=0 #hash vērtība priekš teksta
@@ -60,7 +60,7 @@ def get_occurrences(pattern, text):
               j+=1
               if j==patLen:
                  #print("hello1")
-                 result=result+ str(i) 
+                 result=result + str(i) + " "
         #aprēķina teksta nākamā loga vērtību + noņem pirmo simbolu un pievieno pēdējo 
         if i< textLen-patLen:
             textHashVal=(d*(textHashVal-ord(text[i])*h)+ord(text[i+patLen]))%q
@@ -73,4 +73,4 @@ def get_occurrences(pattern, text):
 
 # this part launches the functions
 if __name__ == '__main__':
-    print_occurrences(get_occurrences(*read_input()))
+    print(get_occurrences(*read_input()))
