@@ -39,8 +39,8 @@ def get_occurrences(pattern, text):
     q=13 #pirmskaitlis
     patLen=len(pattern)
     textLen=len(text)
-    result=""
-    j=0
+    result=''
+    g=0
     i=0
     patHashVal=0 #hash vērtība priekš paterna
     textHashVal=0 #hash vērtība priekš teksta
@@ -56,17 +56,19 @@ def get_occurrences(pattern, text):
     for i in range(textLen-patLen+1):
         if patHashVal==textHashVal:
               for j in range(patLen):
-                   if text[i+j] !=pattern:
+                   if text[i+j] != pattern[j]:
                         break
               j+=1
               if j==patLen:
-                 result=result+str(i) 
+                 #print("hello1")
+                 result=result+ str(i) 
         #aprēķina teksta nākamā loga vērtību + noņem pirmo simbolu un pievieno pēdējo 
         if i< textLen-patLen:
             textHashVal=(d*(textHashVal-ord(text[i])*h)+ord(text[i+patLen]))%q
         #ja gadījumā textHashVAl ir negatīva to pārveidoju uz pozitīvu
             if textHashVal<0:
-                 t=t+q
+                 textHashVal=textHashVal+q
+    #print("result=",result)
     return (result)
 
 
