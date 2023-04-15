@@ -16,9 +16,9 @@ def read_input():
             file_name = open("./test/"+file_name, 'r')
             dataLasa = file_name.read()
             splitedData=dataLasa.split()
-            pattern = splitedData[0]
-            text =splitedData[1]
-       
+            pattern = splitedData[0].rstrip()
+            text =splitedData[1].rstrip()
+            file_name.close()
     # after input type choice
     # read two lines 
     # first line is pattern 
@@ -27,7 +27,7 @@ def read_input():
     # return both lines in one return
     
     # this is the sample return, notice the rstrip function
-        return (pattern.rstrip(), text().rstrip())
+        return (pattern, text)
 
 def print_occurrences(output):
     # this function should control output, it doesn't need any return
@@ -43,7 +43,7 @@ def get_occurrences(pattern, text):
     j=0
     i=0
     patHashVal=0 #hash vērtība priekš paterna
-    textHashVAl=0 #hash vērtība priekš teksta
+    textHashVal=0 #hash vērtība priekš teksta
     h=1
     # and return an iterable variable
     for i in range(patLen-1):
@@ -51,21 +51,21 @@ def get_occurrences(pattern, text):
          #aprēķinās hash vērtību paternam un teksta pirmā loga vērtības
     for i in range(patLen):
          patHashVal=(d * patHashVal+ ord(pattern[i]))%q
-         textHashVAl=(d* textHashVAl+ ord(text[i]))%q
+         textHashVal=(d* textHashVal+ ord(text[i]))%q
     #iet cauri tekstam pārbaudot, kur paterns sakrīt ar tekstu
     for i in range(textLen-patLen+1):
-        if patHashVal==textHashVAl:
+        if patHashVal==textHashVal:
               for j in range(patLen):
-                   if text[i+j] !=pattern[j]:
+                   if text[i+j] !=pattern:
                         break
               j+=1
               if j==patLen:
                  result=result+str(i) 
         #aprēķina teksta nākamā loga vērtību + noņem pirmo simbolu un pievieno pēdējo 
         if i< textLen-patLen:
-            textHashVAl=(d*(textHashVAl-ord(text)[i]*h)+ord(text[i+patHashVal]))%q
+            textHashVal=(d*(textHashVal-ord(text[i])*h)+ord(text[i+patLen]))%q
         #ja gadījumā textHashVAl ir negatīva to pārveidoju uz pozitīvu
-            if textHashVAl<0:
+            if textHashVal<0:
                  t=t+q
     return (result)
 
