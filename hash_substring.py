@@ -9,8 +9,8 @@ def read_input():
         # input from keyboard
         
         if text.startswith("I"):
-            pattern = input()
-            text = input()
+            pattern = input().rstrip()
+            text = input().rstrip()
         if text.startswith("F"):
             file_name = open('./tests/'+'06', 'r')
             dataLasa = file_name.read()
